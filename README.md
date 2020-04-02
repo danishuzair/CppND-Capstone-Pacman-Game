@@ -23,3 +23,8 @@ This is the Capstone project for Udacity's C++ nano-degree. In this project, a v
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+## Resources
+
+pacman background image: https://wallpapersafari.com/w/SLJTV0
+https://yangcha.github.io/iview/iview.html
