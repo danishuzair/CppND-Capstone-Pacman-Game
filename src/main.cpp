@@ -20,15 +20,15 @@ int main() {
     std::vector<std::shared_ptr<Street>> streets;
     CreateTraffic(intersections, streets);
 
-    Renderer renderer(kScreenWidth, kScreenHeight, false);
+    Renderer renderer(kScreenWidth, kScreenHeight);
     Controller controller;
-    Pacman pacman;
+    Pacman pacman(streets.at(63),Direction::left);
     std::vector<Ghost> ghost;
 
-    ghost.emplace_back(Ghost(red));
-    ghost.emplace_back(Ghost(pink));
-    ghost.emplace_back(Ghost(cyan));
-    ghost.emplace_back(Ghost(orange));
+    ghost.emplace_back(Ghost(Color::red));
+    ghost.emplace_back(Ghost(Color::pink));
+    ghost.emplace_back(Ghost(Color::cyan));
+    ghost.emplace_back(Ghost(Color::orange));
     Game game;
     game.Run(controller, renderer, pacman, ghost, intersections, streets, kMsPerFrame);
     return 0;

@@ -5,11 +5,11 @@
 #ifndef SDL2TEST_TRAFFICOBJECT_H
 #define SDL2TEST_TRAFFICOBJECT_H
 
-enum ObjectType{street, intersection};
+enum class ObjectType{street, intersection};
 
 class TrafficObject {
 public:
-
+    ObjectType getType() const {return type;}
 protected:
     ObjectType type;
     static constexpr float foodinterval = 23.5;

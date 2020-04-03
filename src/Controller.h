@@ -6,11 +6,11 @@
 #define SDL2TEST_CONTROLLER_H
 
 #include "SDL.h"
+#include "Pacman.h"
 
 class Controller{
 public:
-    void HandleInput(bool &running) const;
-private:
+    void HandleInput(bool &running, Pacman &pacman) const;
 };
 
 #endif //SDL2TEST_CONTROLLER_H

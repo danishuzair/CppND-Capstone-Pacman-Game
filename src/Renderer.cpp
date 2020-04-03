@@ -81,19 +81,19 @@ void Renderer::Render(const Pacman &pacman, const std::vector<Ghost> &ghosts,
         block.y = ghost.getLocationY();
         Color color = ghost.getColor();
         switch(color) {
-            case(red):
+            case(Color::red):
                 SDL_SetRenderDrawColor(sdl_renderer,0xFF, 0x00, 0x00, 0xFF);
                 SDL_RenderFillRect(sdl_renderer, &block);
                 break;
-            case(pink):
+            case(Color::pink):
                 SDL_SetRenderDrawColor(sdl_renderer,0xFF, 0xB6, 0xC1, 0xFF);
                 SDL_RenderFillRect(sdl_renderer, &block);
                 break;
-            case(cyan):
+            case(Color::cyan):
                 SDL_SetRenderDrawColor(sdl_renderer,0x00, 0xFF, 0xFF, 0xFF);
                 SDL_RenderFillRect(sdl_renderer, &block);
                 break;
-            case(orange):
+            case(Color::orange):
                 SDL_SetRenderDrawColor(sdl_renderer,0xFF, 0xA5, 0x00, 0xFF);
                 SDL_RenderFillRect(sdl_renderer, &block);
                 break;

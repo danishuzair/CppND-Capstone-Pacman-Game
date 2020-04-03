@@ -6,19 +6,19 @@
 
 Ghost::Ghost(Color colorin):color(colorin) {
     switch(color) {
-        case(red):
+        case(Color::red):
             location.x = 252;
             location.y = 221;
             break;
-        case(pink):
+        case(Color::pink):
             location.x = 246;
             location.y = 278;
             break;
-        case(cyan):
+        case(Color::cyan):
             location.x = 222;
             location.y = 278;
             break;
-        case(orange):
+        case(Color::orange):
             location.x = 275;
             location.y = 278;
             break;

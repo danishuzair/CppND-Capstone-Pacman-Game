@@ -20,8 +20,10 @@ void Game::Run(Controller const &controller, Renderer &renderer, Pacman &pacman,
 
         // Input & Update not currently implemented
         // render update
-        controller.HandleInput(running);
+        controller.HandleInput(running, pacman);
+        pacman.updatePosition();
         renderer.Render(pacman, ghost, intersections, streets);
+
         frame_end = SDL_GetTicks();
 
         // Keep track of how long each loop through the input / update / render cycle takes.
@@ -30,10 +32,10 @@ void Game::Run(Controller const &controller, Renderer &renderer, Pacman &pacman,
 
         // Updating title window after every second.
         if (frame_end - title_timestamp >= 1000) {
+            score = pacman.getScore();
             renderer.UpdateWindowTitle(score, frame_count);
             frame_count = 0;
             title_timestamp = frame_end;
-            ++score;
         }
 
         // If frame_duration is smaller than target ms_per_frame, delay the loop to achieve desired frame rate

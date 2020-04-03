@@ -8,7 +8,7 @@
 #include <iostream>
 #include "SDL.h"
 
-enum Color {red, pink, cyan, orange};
+enum class Color {red, pink, cyan, orange};
 
 class Ghost {
 public:
