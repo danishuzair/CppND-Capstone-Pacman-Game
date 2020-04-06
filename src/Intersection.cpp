@@ -12,6 +12,16 @@ void Intersection::setLocation(int x, int y) {
 
 void Intersection::connectStreet(std::shared_ptr<Street> connectedstreets_in) {
     SDL_Point average = connectedstreets_in->getAverage();
+    if(connectedstreets_in->isconnecting()) {
+        if(location.x < 50) {
+            leftStreet = connectedstreets_in;
+            return;
+        }
+        else {
+            rightStreet = connectedstreets_in;
+            return;
+        }
+    }
     if (connectedstreets_in->getTravelDirection() == TravelDirection::horizontal) {
         if (average.x > location.x) {
             rightStreet = connectedstreets_in;
@@ -37,17 +47,17 @@ int Intersection::eatFood() {
             count += 1;
         }
     }
-    else if (downStreet != nullptr) {
+    if (downStreet != nullptr) {
         if (downStreet->eatFood(location.x,location.y)) {
             count += 1;
         }
     }
-    else if (leftStreet != nullptr) {
+    if (leftStreet != nullptr) {
         if (leftStreet->eatFood(location.x,location.y)) {
             count += 1;
         }
     }
-    else if (rightStreet != nullptr) {
+    if (rightStreet != nullptr) {
         if (rightStreet->eatFood(location.x,location.y)) {
             count += 1;
         }

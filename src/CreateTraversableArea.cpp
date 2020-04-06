@@ -125,7 +125,7 @@ void CreateTraffic(std::vector<std::shared_ptr<Intersection>> &intersections, st
     streets.at(39)->initializeStreet(false,false,false,true,intersections.at(14),intersections.at(24));
     streets.at(40)->initializeStreet(false,false,false,true,intersections.at(67),intersections.at(51));
     streets.at(41)->initializeStreet(false,false,false,true,intersections.at(51),intersections.at(57));
-    streets.at(42)->initializeStreet(false,false,false,true,intersections.at(4),intersections.at(57));
+    streets.at(42)->initializeStreet(false,false,false,true,intersections.at(4),intersections.at(57),true);
     streets.at(43)->initializeStreet(true,false,false,true,intersections.at(14),intersections.at(15));
     streets.at(44)->initializeStreet(false,false,false,true,intersections.at(25),intersections.at(40));
     streets.at(45)->initializeStreet(true,false,false,true,intersections.at(51),intersections.at(52));

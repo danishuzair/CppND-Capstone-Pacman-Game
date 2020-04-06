@@ -234,6 +234,16 @@ void Pacman::updatePosition() {
                 std::shared_ptr<Street> newstreet = currentintersection->getLeftStreet();
                 if (newstreet != nullptr) {
                     if (newstreet->getAccessible()) {
+                        if (newstreet->isconnecting()) {
+                            float newxlocation;
+                            float newylocation;
+                            std::shared_ptr<Street> otherstreet =
+                                    newstreet->getOtherStreet(xlocation,ylocation,newxlocation,newylocation,
+                                                              Direction::left);
+                            xlocation = newxlocation;
+                            ylocation = newylocation;
+                            newstreet = otherstreet;
+                        }
                         xlocation -= speed;
                         currentintersectionorstreet = newstreet;
                         if (newstreet->eatFood(xlocation,ylocation)){
@@ -290,6 +300,16 @@ void Pacman::updatePosition() {
                 std::shared_ptr<Street> newstreet = currentintersection->getRightStreet();
                 if (newstreet != nullptr) {
                     if (newstreet->getAccessible()) {
+                        if (newstreet->isconnecting()) {
+                            float newxlocation;
+                            float newylocation;
+                            std::shared_ptr<Street> otherstreet =
+                                    newstreet->getOtherStreet(xlocation,ylocation,newxlocation,newylocation,
+                                            Direction::right);
+                            xlocation = newxlocation;
+                            ylocation = newylocation;
+                            newstreet = otherstreet;
+                        }
                         xlocation += speed;
                         currentintersectionorstreet = newstreet;
                         if (newstreet->eatFood(xlocation,ylocation)) {

@@ -8,7 +8,9 @@
 
 void Street::initializeStreet(bool hasfood_in, bool hasfoodatstart, bool hasfoodatend, bool accessible_in,
                               std::shared_ptr<Intersection> startintersection_in,
-                              std::shared_ptr<Intersection> endIntersection_in) {
+                              std::shared_ptr<Intersection> endIntersection_in,
+                              bool connectingends_in) {
+    connectingends = connectingends_in;
     startintersection = startintersection_in;
     endintersection = endIntersection_in;
     setAverage();
@@ -88,20 +90,38 @@ bool Street::eatFood(float x, float y) {
         if (foods.at(i).x < int(x) + 5 && foods.at(i).x > int(x) - 5 &&
                 foods.at(i).y < int(y) + 5 && foods.at(i).y > int(y) - 5) {
             foods.erase(foods.begin() + i);
+            if(foods.empty()) {
+                hasfood = false;
+            }
             return true;
         }
     }
     return false;
 }
 
-IntersectionLocation Street::checkifclosetointersection(float x, float y) {
-    if (startintersection->getLocationX() < int(x) + 20 &&
-            startintersection->getLocationX() > int(x) - 20 &&
-            startintersection->getLocationY() < int(y) + 20 &&
-            startintersection->getLocationY() > int(y) - 20) {
+IntersectionLocation Street::checkifclosetointersection(float x, float y, Direction direction) {
+    if (direction == Direction::right && x < startintersection->getLocationX() && x > startintersection->getLocationX() -100) {
         return IntersectionLocation::start;
     }
-    else if (endintersection->getLocationX() == int(x) && endintersection->getLocationY() == int(y)) {
+    else if (direction == Direction::left && x > startintersection->getLocationX() && x < startintersection->getLocationX() +100) {
+        return IntersectionLocation::start;
+    }
+    else if (direction == Direction::down && y < startintersection->getLocationY() && y > startintersection->getLocationY() -100) {
+        return IntersectionLocation::start;
+    }
+    else if (direction == Direction::up && y > startintersection->getLocationY() && y < startintersection->getLocationY() +100) {
+        return IntersectionLocation::start;
+    }
+    else if (direction == Direction::right && x < endintersection->getLocationX() && x > endintersection->getLocationX() -100) {
+        return IntersectionLocation::end;
+    }
+    else if (direction == Direction::left && x > endintersection->getLocationX() && x < endintersection->getLocationX() +100) {
+        return IntersectionLocation::end;
+    }
+    else if (direction == Direction::down && y < endintersection->getLocationY() && y > endintersection->getLocationY() -100) {
+        return IntersectionLocation::end;
+    }
+    else if (direction == Direction::up && y > endintersection->getLocationY() && y < endintersection->getLocationY() +100) {
         return IntersectionLocation::end;
     }
     else {
@@ -110,11 +130,12 @@ IntersectionLocation Street::checkifclosetointersection(float x, float y) {
 }
 
 bool Street::closetointersection(float x, float y, Direction direction) {
-    IntersectionLocation  closeintersection = checkifclosetointersection(x,y);
+    IntersectionLocation  closeintersection = checkifclosetointersection(x,y, direction);
     if (closeintersection == IntersectionLocation::neither) {
         return false;
     }
     switch (direction) {
+        std::cout<<"Checking\n";
         case Direction::left:
             if (closeintersection == IntersectionLocation::start) {
                 if (startintersection->getLeftStreet() != nullptr) {
@@ -165,4 +186,37 @@ bool Street::closetointersection(float x, float y, Direction direction) {
             break;
     }
     return false;
+}
+
+std::shared_ptr<Street>
+Street::getOtherStreet(float xlocation, float ylocation, float &newxlocation, float &newylocation,
+                       Direction direction_in) {
+    if (startintersection->getLocationX() == xlocation && startintersection->getLocationY() == ylocation) {
+        newxlocation = endintersection->getLocationX();
+        newylocation = endintersection->getLocationY();
+        switch(direction_in) {
+            case(Direction::right):
+                return endintersection->getRightStreet();
+            case(Direction::left):
+                return endintersection->getLeftStreet();
+            case(Direction::up):
+                return endintersection->getUpStreet();
+            case(Direction::down):
+                return endintersection->getDownStreet();
+        }
+    }
+    else {
+        newxlocation = startintersection->getLocationX();
+        newylocation = startintersection->getLocationY();
+        switch(direction_in) {
+            case(Direction::right):
+                return startintersection->getRightStreet();
+            case(Direction::left):
+                return startintersection->getLeftStreet();
+            case(Direction::up):
+                return startintersection->getUpStreet();
+            case(Direction::down):
+                return startintersection->getDownStreet();
+        }
+    }
 }

@@ -13,20 +13,11 @@
   <component name="ChangeListManager">
     <list default="true" id="08ccc47d-8e19-4b68-843a-c92f44da1317" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ghost.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ghost.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ghost.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ghost.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CreateTraversableArea.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/CreateTraversableArea.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Intersection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intersection.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Intersection.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intersection.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pacman.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pacman.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pacman.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pacman.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Street.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Street.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Street.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Street.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrafficObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrafficObject.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,22 +30,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.cpp">
+        <entry file="file://$PROJECT_DIR$/src/TrafficObject.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="75">
+              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Street.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-615">
-              <caret line="97" column="55" selection-start-line="97" selection-start-column="53" selection-end-line="97" selection-end-column="55" />
+            <state relative-caret-position="420">
+              <caret line="123" column="122" selection-start-line="123" selection-start-column="122" selection-end-line="123" selection-end-column="122" />
               <folding>
                 <element signature="e#39#58#0" expanded="true" />
               </folding>
@@ -63,21 +51,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TrafficObject.h">
+        <entry file="file://$PROJECT_DIR$/src/Street.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="615">
+              <caret line="41" column="89" selection-start-line="41" selection-start-column="89" selection-end-line="41" selection-end-column="89" />
+              <folding>
+                <element signature="e#92#109#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Street.h">
+        <entry file="file://$PROJECT_DIR$/src/Intersection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+            <state>
               <folding>
-                <element signature="e#92#109#0" expanded="true" />
+                <element signature="e#39#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,34 +95,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Intersection.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
-              <folding>
-                <element signature="e#104#120#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Intersection.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-              <folding>
-                <element signature="e#39#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pacman.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="279" column="63" selection-start-line="279" selection-start-column="63" selection-end-line="279" selection-end-column="63" />
+            <state relative-caret-position="720">
+              <caret line="48" column="50" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -140,11 +106,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pacman.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="450">
               <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
               <folding>
                 <element signature="e#92#108#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CreateTraversableArea.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1905">
+              <caret line="127" column="92" selection-start-line="127" selection-end-line="128" />
             </state>
           </provider>
         </entry>
@@ -180,7 +155,6 @@
         <option value="$PROJECT_DIR$/src/CreateTraversableArea.h" />
         <option value="$PROJECT_DIR$/src/Game.h" />
         <option value="$PROJECT_DIR$/src/Renderer.h" />
-        <option value="$PROJECT_DIR$/src/CreateTraversableArea.cpp" />
         <option value="$PROJECT_DIR$/src/Ghost.h" />
         <option value="$PROJECT_DIR$/src/Ghost.cpp" />
         <option value="$PROJECT_DIR$/src/Renderer.cpp" />
@@ -188,16 +162,18 @@
         <option value="$PROJECT_DIR$/src/Controller.h" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/src/Game.cpp" />
-        <option value="$PROJECT_DIR$/src/Intersection.cpp" />
-        <option value="$PROJECT_DIR$/src/Intersection.h" />
         <option value="$PROJECT_DIR$/src/Pacman.h" />
         <option value="$PROJECT_DIR$/src/TrafficObject.h" />
+        <option value="$PROJECT_DIR$/src/Intersection.h" />
+        <option value="$PROJECT_DIR$/src/CreateTraversableArea.cpp" />
+        <option value="$PROJECT_DIR$/src/Pacman.cpp" />
+        <option value="$PROJECT_DIR$/src/Intersection.cpp" />
         <option value="$PROJECT_DIR$/src/Street.h" />
         <option value="$PROJECT_DIR$/src/Street.cpp" />
-        <option value="$PROJECT_DIR$/src/Pacman.cpp" />
       </list>
     </option>
   </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
     <option name="y" value="25" />
@@ -269,30 +245,31 @@
       <option name="presentableId" value="Default" />
       <updated>1585754323402</updated>
       <workItem from="1585754325152" duration="34306000" />
-      <workItem from="1585845633195" duration="30835000" />
+      <workItem from="1585845633195" duration="31643000" />
+      <workItem from="1585941926880" duration="10886000" />
+      <workItem from="1586017047772" duration="553000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65141000" />
+    <option name="totallyTimeSpent" value="77388000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
+    <frame x="67" y="25" width="1853" height="1175" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18262313" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21582733" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32829374" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32924107" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3392857" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.36069113" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.273872" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.36049107" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.27262932" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32948583" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.32948583" />
@@ -333,13 +310,6 @@
           <folding>
             <element signature="e#122#141#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CreateTraversableArea.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2040">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
@@ -394,12 +364,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pacman.h">
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+        <state relative-caret-position="150">
+          <caret line="10" column="19" selection-start-line="10" selection-end-line="11" />
           <folding>
-            <element signature="e#92#108#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -410,6 +380,32 @@
           <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
           <folding>
             <element signature="e#104#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TrafficObject.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Street.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="89" selection-start-line="41" selection-start-column="89" selection-end-line="41" selection-end-column="89" />
+          <folding>
+            <element signature="e#92#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Intersection.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#39#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -431,57 +427,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TrafficObject.h">
+    <entry file="file://$PROJECT_DIR$/src/Pacman.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        <state relative-caret-position="720">
+          <caret line="48" column="50" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Street.h">
+    <entry file="file://$PROJECT_DIR$/src/Pacman.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        <state relative-caret-position="450">
+          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
           <folding>
-            <element signature="e#92#109#0" expanded="true" />
+            <element signature="e#92#108#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Intersection.cpp">
+    <entry file="file://$PROJECT_DIR$/src/CreateTraversableArea.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-          <folding>
-            <element signature="e#39#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1905">
+          <caret line="127" column="92" selection-start-line="127" selection-end-line="128" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Street.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-615">
-          <caret line="97" column="55" selection-start-line="97" selection-start-column="53" selection-end-line="97" selection-end-column="55" />
+        <state relative-caret-position="420">
+          <caret line="123" column="122" selection-start-line="123" selection-start-column="122" selection-end-line="123" selection-end-column="122" />
           <folding>
             <element signature="e#39#58#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pacman.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="279" column="63" selection-start-line="279" selection-start-column="63" selection-end-line="279" selection-end-column="63" />
         </state>
       </provider>
     </entry>
