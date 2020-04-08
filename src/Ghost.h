@@ -13,6 +13,7 @@
 #include <random>
 
 enum class Color {red, pink, cyan, orange};
+enum class GhostState {gameon, gemeend};
 
 Direction getRandomDirection();
 
@@ -24,7 +25,13 @@ public:
     int getLocationX () const{return int(xlocation);}
     int getLocationY () const{return int(ylocation);}
     void updatePosition();
+    bool checkForCollision(float x, float y);
+    void resettoinitialstate();
+    void settodeadstate();
 private:
+    GhostState ghoststate = GhostState::gameon;
+    Direction startdirection;
+    std::shared_ptr<TrafficObject> startintersectionorstreet;
     void updateDirection();
     int currentcycles{0};
     int startdelay;

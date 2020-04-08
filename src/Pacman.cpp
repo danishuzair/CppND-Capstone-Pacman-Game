@@ -23,7 +23,12 @@ void PrintDirection(Direction direction) {
 
 Pacman::Pacman(std::shared_ptr<TrafficObject> currentintersectionorstreet_in,
         Direction currentdirection_in) :
-        currentdirection(currentdirection_in), currentintersectionorstreet(currentintersectionorstreet_in){
+        currentdirection(currentdirection_in),
+        currentintersectionorstreet(currentintersectionorstreet_in),
+        startdirection(currentdirection_in),
+        startintersectionorstreet(currentintersectionorstreet_in)
+        {
+    pacmanstate = PacmanState::newborn;
     xlocation = 248;
     ylocation = 473;
 }
@@ -110,7 +115,7 @@ void Pacman::updateDirection(Direction direction_new) {
 }
 
 void Pacman::updatePosition() {
-    if(pacmanstate == PacmanState::dead) {
+    if(pacmanstate == PacmanState::dead || pacmanstate == PacmanState::victory) {
         return;
     }
     switch (currentdirection) {
@@ -359,11 +364,61 @@ void Pacman::updatePosition() {
             }
             break;
     }
-    if (score == 1870) {
-        updatestate(PacmanState::dead);
-    }
 }
 
 void Pacman::updatestate(PacmanState pacmanstate_new) {
     pacmanstate = pacmanstate_new;
+}
+
+void Pacman::updatepacmanandghoststates(std::vector<Ghost> &ghosts) {
+    bool collisiondetected = false;
+    for (auto &ghost : ghosts) {
+        collisiondetected = ghost.checkForCollision(xlocation,ylocation);
+        if (collisiondetected) {
+            break;
+        }
+    }
+    if (collisiondetected) {
+        resettoinitialstate();
+        if(pacmanstate!=PacmanState::dead) {
+            for (auto &ghost : ghosts) {
+                ghost.resettoinitialstate();
+            }
+        }
+        else {
+            for (auto &ghost : ghosts) {
+                ghost.settodeadstate();
+            }
+        }
+    }
+
+    if(score >= 1870) {
+        updatestate(PacmanState::victory);
+        for (auto &ghost : ghosts) {
+            ghost.settodeadstate();
+        }
+    }
+}
+
+void Pacman::resettoinitialstate() {
+    switch(pacmanstate) {
+        case(PacmanState::newborn):
+            pacmanstate = PacmanState::secondlife;
+            break;
+        case(PacmanState::secondlife):
+            pacmanstate = PacmanState::thirdlife;
+            break;
+        case(PacmanState::thirdlife):
+            pacmanstate = PacmanState::fourthlife;
+            break;
+        case(PacmanState::fourthlife):
+            pacmanstate = PacmanState::dead;
+            break;
+    }
+    if (pacmanstate != PacmanState::dead) {
+        xlocation = 248;
+        ylocation = 473;
+        currentdirection = startdirection;
+        currentintersectionorstreet = startintersectionorstreet;
+    }
 }

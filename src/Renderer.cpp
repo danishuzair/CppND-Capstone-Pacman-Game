@@ -128,7 +128,28 @@ void Renderer::Render(const Pacman &pacman, const std::vector<Ghost> &ghosts,
     SDL_RenderPresent(sdl_renderer);
 }
 
-void Renderer::UpdateWindowTitle(int score, int fps) {
-    std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
+void Renderer::UpdateWindowTitle(int score, int fps, PacmanState currentstate) {
+    std::string gamestate;
+    switch(currentstate) {
+        case(PacmanState::newborn):
+            gamestate = " Lives left: 3";
+            break;
+        case(PacmanState::secondlife):
+            gamestate = " Lives left: 2";
+            break;
+        case(PacmanState::thirdlife):
+            gamestate = " Lives left: 1";
+            break;
+        case(PacmanState::fourthlife):
+            gamestate = " Lives left: 0";
+            break;
+        case(PacmanState::victory):
+            gamestate = " Congratulations! You won!";
+            break;
+        case(PacmanState::dead):
+            gamestate = " You lost! Please try again!";
+            break;
+    }
+    std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps) + gamestate};
     SDL_SetWindowTitle(sdl_window, title.c_str());
 }

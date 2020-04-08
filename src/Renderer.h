@@ -22,7 +22,7 @@ public:
     void Render(const Pacman &pacman, const std::vector<Ghost> &ghosts,
             std::vector<std::shared_ptr<Intersection>> &intersections,
             std::vector<std::shared_ptr<Street>> &streets);
-    void UpdateWindowTitle(int score, int fps);
+    void UpdateWindowTitle(int score, int fps, PacmanState currentstate);
 
 private:
     SDL_Window *sdl_window;

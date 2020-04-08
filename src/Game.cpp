@@ -25,6 +25,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, Pacman &pacman,
         for (auto &ghost : ghosts) {
             ghost.updatePosition();
         }
+        pacman.updatepacmanandghoststates(ghosts);
         renderer.Render(pacman, ghosts, intersections, streets);
 
         frame_end = SDL_GetTicks();
@@ -36,7 +37,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, Pacman &pacman,
         // Updating title window after every second.
         if (frame_end - title_timestamp >= 1000) {
             score = pacman.getScore();
-            renderer.UpdateWindowTitle(score, frame_count);
+            renderer.UpdateWindowTitle(score, frame_count, pacman.getCurrentState());
             frame_count = 0;
             title_timestamp = frame_end;
         }

@@ -26,7 +26,9 @@ Ghost::Ghost(Color colorin, std::shared_ptr<TrafficObject> currentintersectionor
              color(colorin),
              currentdirection(currentdirection_in),
              currentintersectionorstreet(currentintersectionorstreet_in),
-             startdelay(startdelay_in)
+             startdelay(startdelay_in),
+             startdirection(currentdirection_in),
+             startintersectionorstreet(currentintersectionorstreet_in)
 {
     switch(color) {
         case(Color::red):
@@ -52,6 +54,9 @@ Ghost::Ghost(Color colorin, std::shared_ptr<TrafficObject> currentintersectionor
 }
 
 void Ghost::updatePosition() {
+    if (ghoststate == GhostState::gemeend) {
+        return;
+    }
     if (currentcycles >= startdelay) {
         if (currentintersectionorstreet->getType() != ObjectType::intersection) {
 
@@ -65,9 +70,31 @@ void Ghost::updatePosition() {
                 ylocation += speed;
             }
             else if (currentdirection == Direction::left) {
+                if (currentstreet->isconnecting()) {
+                    float newxlocation;
+                    float newylocation;
+                    std::shared_ptr<Street> otherstreet =
+                            currentstreet->getOtherStreet(xlocation,ylocation,newxlocation,newylocation,
+                                                      Direction::left);
+                    xlocation = newxlocation;
+                    ylocation = newylocation;
+                    currentstreet = otherstreet;
+                    currentintersectionorstreet = currentstreet;
+                }
                 xlocation -= speed;
             }
             else if (currentdirection == Direction::right) {
+                if (currentstreet->isconnecting()) {
+                    float newxlocation;
+                    float newylocation;
+                    std::shared_ptr<Street> otherstreet =
+                            currentstreet->getOtherStreet(xlocation,ylocation,newxlocation,newylocation,
+                                                          Direction::right);
+                    xlocation = newxlocation;
+                    ylocation = newylocation;
+                    currentstreet = otherstreet;
+                    currentintersectionorstreet = currentstreet;
+                }
                 xlocation += speed;
             }
 
@@ -113,4 +140,39 @@ void Ghost::updateDirection() {
     }
     currentintersectionorstreet = newstreet;
     currentdirection = desireddirection;
+}
+
+bool Ghost::checkForCollision(float x, float y) {
+    if (x < xlocation + 5 && x > xlocation - 5 && y < ylocation + 5 && y > ylocation - 5) {
+        return true;
+    }
+    return false;
+}
+
+void Ghost::resettoinitialstate() {
+    switch(color) {
+        case (Color::red):
+            xlocation = 253;
+            ylocation = 228;
+            break;
+        case (Color::pink):
+            xlocation = 253;
+            ylocation = 288;
+            break;
+        case (Color::cyan):
+            xlocation = 253;
+            ylocation = 288;
+            break;
+        case (Color::orange):
+            xlocation = 253;
+            ylocation = 288;
+            break;
+    }
+    currentcycles = 0;
+    currentdirection = startdirection;
+    currentintersectionorstreet = startintersectionorstreet;
+}
+
+void Ghost::settodeadstate() {
+    ghoststate = GhostState::gemeend;
 }
