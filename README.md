@@ -40,22 +40,22 @@ In addition, the Ghosts move randomly. At each intersection, they randomly decid
 
 ## Rubric Points
 
-Criteria: The project uses Object Oriented Programming techniques.
+Criteria: The project uses Object Oriented Programming techniques.\
 Specification met via: There are multiple classes in the project, including Ghost, Intersection, Pacman, Street, and TrafficObject.
 
-Criteria: Classes use appropriate access specifiers for class members.
+Criteria: Classes use appropriate access specifiers for class members.\
 Specification met via: Each of the above listed class has private and public methods.
 
-Criteria: Class constructors utilize member initialization lists.
+Criteria: Class constructors utilize member initialization lists.\
 Specification met via: The following classes use initialization lists: Ghost, Pacman, Street
 
-Criteria: Classes follow an appropriate inheritance hierarchy.
+Criteria: Classes follow an appropriate inheritance hierarchy.\
 Specification met via: In almost all cases, composition was used in this project. The only situation in which inheritance was used was in the case of the TrafficObject base class, which has two child classes, Intersection & Street.
 
-Criteria: The project makes use of references in function declarations.
+Criteria: The project makes use of references in function declarations.\
 Specification met via: The following classes use a reference to Intersection & Street objects: Ghost, Pacman
 
-Criteria: The project uses smart pointers instead of raw pointers.
+Criteria: The project uses smart pointers instead of raw pointers.\
 Specification met via: The Intersection & Street class instances were defined used smart pointers.
 
 ## Resources
