@@ -106,22 +106,22 @@ IntersectionLocation Street::checkifclosetointersection(float x, float y, Direct
     else if (direction == Direction::left && x > startintersection->getLocationX() && x < startintersection->getLocationX() +100) {
         return IntersectionLocation::start;
     }
-    else if (direction == Direction::down && y < startintersection->getLocationY() && y > startintersection->getLocationY() -100) {
+    else if (direction == Direction::down && y < startintersection->getLocationY() && y > startintersection->getLocationY() -200) {
         return IntersectionLocation::start;
     }
-    else if (direction == Direction::up && y > startintersection->getLocationY() && y < startintersection->getLocationY() +100) {
+    else if (direction == Direction::up && y > startintersection->getLocationY() && y < startintersection->getLocationY() +200) {
         return IntersectionLocation::start;
     }
-    else if (direction == Direction::right && x < endintersection->getLocationX() && x > endintersection->getLocationX() -100) {
+    else if (direction == Direction::right && x < endintersection->getLocationX() && x > endintersection->getLocationX() -200) {
         return IntersectionLocation::end;
     }
-    else if (direction == Direction::left && x > endintersection->getLocationX() && x < endintersection->getLocationX() +100) {
+    else if (direction == Direction::left && x > endintersection->getLocationX() && x < endintersection->getLocationX() +200) {
         return IntersectionLocation::end;
     }
-    else if (direction == Direction::down && y < endintersection->getLocationY() && y > endintersection->getLocationY() -100) {
+    else if (direction == Direction::down && y < endintersection->getLocationY() && y > endintersection->getLocationY() -200) {
         return IntersectionLocation::end;
     }
-    else if (direction == Direction::up && y > endintersection->getLocationY() && y < endintersection->getLocationY() +100) {
+    else if (direction == Direction::up && y > endintersection->getLocationY() && y < endintersection->getLocationY() +200) {
         return IntersectionLocation::end;
     }
     else {
@@ -129,13 +129,12 @@ IntersectionLocation Street::checkifclosetointersection(float x, float y, Direct
     }
 }
 
-bool Street::closetointersection(float x, float y, Direction direction) {
-    IntersectionLocation  closeintersection = checkifclosetointersection(x,y, direction);
+bool Street::closetointersection(float x, float y, Direction currentdirection, Direction desireddirection) {
+    IntersectionLocation  closeintersection = checkifclosetointersection(x,y, currentdirection);
     if (closeintersection == IntersectionLocation::neither) {
         return false;
     }
-    switch (direction) {
-        std::cout<<"Checking\n";
+    switch (desireddirection) {
         case Direction::left:
             if (closeintersection == IntersectionLocation::start) {
                 if (startintersection->getLeftStreet() != nullptr) {

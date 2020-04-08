@@ -11,7 +11,10 @@
 #include "Street.h"
 #include "Intersection.h"
 
-enum class Direction{left, right, up, down};
+enum class Direction{left=0, right=1, up=2, down=3};
+enum class PacmanState{newborn, secondlife, thirdlife, fourthlife, dead};
+
+void PrintDirection(Direction direction);
 
 class Pacman {
 public:
@@ -21,6 +24,7 @@ public:
     int getLocationY () const{return ylocation;}
     int getScore() const {return score;}
     void updatePosition();
+    void updatestate(PacmanState pacmanstate_new);
 private:
     float speed{1.0f};
     float xlocation;
@@ -30,6 +34,7 @@ private:
     Direction newdirection;
     bool changedirection = false;
     std::shared_ptr<TrafficObject> currentintersectionorstreet;
+    PacmanState pacmanstate;
 };
 
 #endif //SDL2TEST_PACMAN_H

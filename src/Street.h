@@ -33,7 +33,7 @@ public:
     std::shared_ptr<Intersection> checkifatintersection(float xlocation, float ylocation);
     bool getAccessible() const { return accessible;}
     bool eatFood(float x, float y);
-    bool closetointersection(float x, float y, Direction direction);
+    bool closetointersection(float x, float y, Direction currentdirection, Direction desireddirection);
     bool isconnecting() const {return connectingends;}
     std::shared_ptr<Street> getOtherStreet(float xlocation,float ylocation,float &newxlocation,
             float &newylocation, Direction direction_in);

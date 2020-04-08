@@ -4,6 +4,23 @@
 
 #include "Pacman.h"
 
+void PrintDirection(Direction direction) {
+    switch(direction) {
+        case(Direction::left):
+            std::cout<<"left\n";
+            break;
+        case(Direction::right):
+            std::cout<<"right\n";
+            break;
+        case(Direction::up):
+            std::cout<<"up\n";
+            break;
+        case(Direction::down):
+            std::cout<<"down\n";
+            break;
+    }
+}
+
 Pacman::Pacman(std::shared_ptr<TrafficObject> currentintersectionorstreet_in,
         Direction currentdirection_in) :
         currentdirection(currentdirection_in), currentintersectionorstreet(currentintersectionorstreet_in){
@@ -15,10 +32,12 @@ void Pacman::updateDirection(Direction direction_new) {
     if ((currentdirection == Direction::right || currentdirection == Direction::left) &&
             (direction_new == Direction::right || direction_new == Direction::left)) {
         currentdirection = direction_new;
+        changedirection = false;
     }
     else if ((currentdirection == Direction::up || currentdirection == Direction::down) &&
              (direction_new == Direction::up || direction_new == Direction::down)) {
         currentdirection = direction_new;
+        changedirection = false;
     }
     else if (currentdirection == Direction::right || currentdirection == Direction::left) {
         if (currentintersectionorstreet->getType() == ObjectType::intersection) {
@@ -30,6 +49,7 @@ void Pacman::updateDirection(Direction direction_new) {
                     if (newstreet->getAccessible()) {
                         currentdirection = direction_new;
                         currentintersectionorstreet = newstreet;
+                        changedirection = false;
                     }
                 }
             }
@@ -39,6 +59,7 @@ void Pacman::updateDirection(Direction direction_new) {
                     if (newstreet->getAccessible()) {
                         currentdirection = direction_new;
                         currentintersectionorstreet = newstreet;
+                        changedirection = false;
                     }
                 }
             }
@@ -46,7 +67,7 @@ void Pacman::updateDirection(Direction direction_new) {
         else {
             std::shared_ptr<Street> currentstreet =
                     std::reinterpret_pointer_cast<Street>(currentintersectionorstreet);
-            if (currentstreet->closetointersection(xlocation,ylocation,direction_new)) {
+            if (currentstreet->closetointersection(xlocation,ylocation,currentdirection,direction_new)) {
                 changedirection = true;
                 newdirection = direction_new;
             }
@@ -62,6 +83,7 @@ void Pacman::updateDirection(Direction direction_new) {
                     if (newstreet->getAccessible()) {
                         currentdirection = direction_new;
                         currentintersectionorstreet = newstreet;
+                        changedirection = false;
                     }
                 }
             }
@@ -71,6 +93,7 @@ void Pacman::updateDirection(Direction direction_new) {
                     if (newstreet->getAccessible()) {
                         currentdirection = direction_new;
                         currentintersectionorstreet = newstreet;
+                        changedirection = false;
                     }
                 }
             }
@@ -78,7 +101,7 @@ void Pacman::updateDirection(Direction direction_new) {
         else {
             std::shared_ptr<Street> currentstreet =
                     std::reinterpret_pointer_cast<Street>(currentintersectionorstreet);
-            if (currentstreet->closetointersection(xlocation,ylocation,direction_new)) {
+            if (currentstreet->closetointersection(xlocation,ylocation,currentdirection,direction_new)) {
                 changedirection = true;
                 newdirection = direction_new;
             }
@@ -87,6 +110,9 @@ void Pacman::updateDirection(Direction direction_new) {
 }
 
 void Pacman::updatePosition() {
+    if(pacmanstate == PacmanState::dead) {
+        return;
+    }
     switch (currentdirection) {
         case Direction::up:
             if(currentintersectionorstreet->getType() == ObjectType::intersection) {
@@ -333,4 +359,11 @@ void Pacman::updatePosition() {
             }
             break;
     }
+    if (score == 1870) {
+        updatestate(PacmanState::dead);
+    }
+}
+
+void Pacman::updatestate(PacmanState pacmanstate_new) {
+    pacmanstate = pacmanstate_new;
 }

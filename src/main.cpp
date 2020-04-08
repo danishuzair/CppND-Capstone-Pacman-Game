@@ -23,13 +23,13 @@ int main() {
     Renderer renderer(kScreenWidth, kScreenHeight);
     Controller controller;
     Pacman pacman(streets.at(63),Direction::left);
-    std::vector<Ghost> ghost;
+    std::vector<Ghost> ghosts;
 
-    ghost.emplace_back(Ghost(Color::red));
-    ghost.emplace_back(Ghost(Color::pink));
-    ghost.emplace_back(Ghost(Color::cyan));
-    ghost.emplace_back(Ghost(Color::orange));
+    ghosts.emplace_back(Ghost(Color::red,streets.at(32),Direction::left,0));
+    ghosts.emplace_back(Ghost(Color::pink,streets.at(36),Direction::up,120));
+    ghosts.emplace_back(Ghost(Color::cyan,streets.at(36),Direction::up,240));
+    ghosts.emplace_back(Ghost(Color::orange,streets.at(36),Direction::up,360));
     Game game;
-    game.Run(controller, renderer, pacman, ghost, intersections, streets, kMsPerFrame);
+    game.Run(controller, renderer, pacman, ghosts, intersections, streets, kMsPerFrame);
     return 0;
 }
