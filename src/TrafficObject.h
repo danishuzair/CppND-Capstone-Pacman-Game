@@ -15,5 +15,4 @@ protected:
     static constexpr float foodinterval = 23.5;
 };
 
-
 #endif //SDL2TEST_TRAFFICOBJECT_H
