@@ -10,57 +10,58 @@ void Intersection::setLocation(int x, int y) {
     location.y = y;
 }
 
-void Intersection::connectStreet(std::shared_ptr<Street> connectedstreets_in) {
-    SDL_Point average = connectedstreets_in->getAverage();
-    if(connectedstreets_in->isconnecting()) {
-        if(location.x < 50) {
-            leftStreet = connectedstreets_in;
-            return;
-        }
-        else {
-            rightStreet = connectedstreets_in;
-            return;
-        }
+bool Intersection::connectWhenStreetGoesAcrossGuiEdge(std::shared_ptr<Street> connectedstreets_in){
+    if(connectedstreets_in->isconnecting() && location.x < 50) {
+        leftStreet = connectedstreets_in;
+        return true;
     }
-    if (connectedstreets_in->getTravelDirection() == TravelDirection::horizontal) {
-        if (average.x > location.x) {
-            rightStreet = connectedstreets_in;
-        }
-        else {
-            leftStreet = connectedstreets_in;
-        }
+    else if(connectedstreets_in->isconnecting()) {
+        rightStreet = connectedstreets_in;
+        return true;
+    }
+    return false;
+}
+
+void Intersection::connectHorizontalStreet(std::shared_ptr<Street> connectedstreets_in, double x){
+    if (x > location.x) {
+        rightStreet = connectedstreets_in;
     }
     else {
-        if (average.y > location.y) {
-            downStreet = connectedstreets_in;
-        }
-        else {
-            upStreet = connectedstreets_in;
-        }
+        leftStreet = connectedstreets_in;
     }
+}
+
+void Intersection::connectVerticalStreet(std::shared_ptr<Street> connectedstreets_in, double y){
+    if (y > location.y) {
+        downStreet = connectedstreets_in;
+    }
+    else {
+        upStreet = connectedstreets_in;
+    }
+}
+
+void Intersection::connectStreet(std::shared_ptr<Street> connectedstreets_in) {
+    if (connectWhenStreetGoesAcrossGuiEdge(connectedstreets_in)) {return;}
+    SDL_Point average = connectedstreets_in->getAverage();
+    if (connectedstreets_in->getTravelDirection() == TravelDirection::horizontal) {
+        connectHorizontalStreet(connectedstreets_in, average.x);
+    }
+    else{
+        connectVerticalStreet(connectedstreets_in, average.y);
+    }
+}
+
+int Intersection::checkAndEatFood(std::shared_ptr<Street> street){
+    if (street == nullptr) {return 0;}
+    if (street->eatFood(location.x,location.y)) {return 1;}
+    return 0;
 }
 
 int Intersection::eatFood() {
     int count = 0;
-    if (upStreet != nullptr) {
-        if (upStreet->eatFood(location.x,location.y)) {
-            count += 1;
-        }
-    }
-    if (downStreet != nullptr) {
-        if (downStreet->eatFood(location.x,location.y)) {
-            count += 1;
-        }
-    }
-    if (leftStreet != nullptr) {
-        if (leftStreet->eatFood(location.x,location.y)) {
-            count += 1;
-        }
-    }
-    if (rightStreet != nullptr) {
-        if (rightStreet->eatFood(location.x,location.y)) {
-            count += 1;
-        }
-    }
+    count += checkAndEatFood(upStreet);
+    count += checkAndEatFood(downStreet);
+    count += checkAndEatFood(leftStreet);
+    count += checkAndEatFood(rightStreet);
     return count;
 }

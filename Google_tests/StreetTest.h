@@ -9,8 +9,10 @@
 #include <../src/Intersection.h>
 #include "../src/Street.h"
 
-class StreetTest {
-
+class StreetTest : public testing::Test  {
+protected:
+	virtual void SetUp() {street = std::make_shared<Street>();}
+    std::shared_ptr<Street> street;
 };
 
 

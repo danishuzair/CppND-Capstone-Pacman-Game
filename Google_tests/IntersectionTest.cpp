@@ -58,6 +58,20 @@ TEST_F(IntersectionTest, CheckNeigboringStreetsSetCorrectly) {
             ,false);
     intersection->connectStreet(downstreet);
     EXPECT_EQ(downstreet.get(),intersection->getDownStreet().get());
+
+    std::shared_ptr<Intersection> leftEdgeConnectingIntersection = std::make_shared<Intersection>();
+    leftEdgeConnectingIntersection->setLocation(25,50);
+    std::shared_ptr<Street> leftEdgeConnectingStreet = std::make_shared<Street>();
+    leftEdgeConnectingStreet->initializeStreet(true,true,true,true,intersection,leftEdgeConnectingIntersection, true);
+    leftEdgeConnectingIntersection->connectStreet(leftEdgeConnectingStreet);
+    EXPECT_EQ(leftEdgeConnectingStreet.get(),leftEdgeConnectingIntersection->getLeftStreet().get());
+
+    std::shared_ptr<Intersection> rightEdgeConnectingIntersection = std::make_shared<Intersection>();
+    rightEdgeConnectingIntersection->setLocation(250,50);
+    std::shared_ptr<Street> rightEdgeConnectingStreet = std::make_shared<Street>();
+    rightEdgeConnectingStreet->initializeStreet(true,true,true,true,intersection,rightEdgeConnectingIntersection, true);
+    rightEdgeConnectingIntersection->connectStreet(rightEdgeConnectingStreet);
+    EXPECT_EQ(rightEdgeConnectingStreet.get(),rightEdgeConnectingIntersection->getRightStreet().get());
 }
 
 TEST_F(IntersectionTest, CheckFoodEatenProperly) {
@@ -68,5 +82,11 @@ TEST_F(IntersectionTest, CheckFoodEatenProperly) {
     leftstreet->initializeStreet(true,true,true,true,intersection,leftEndIntersection
             ,false);
     intersection->connectStreet(leftstreet);
+
     EXPECT_EQ(intersection->eatFood(),1);
+    std::shared_ptr<Intersection> rightEndIntersection = std::make_shared<Intersection>();
+    rightEndIntersection->setLocation(200,250);
+    std::shared_ptr<Street> newStreet = std::make_shared<Street>();
+    newStreet->initializeStreet(true,false,false,true,leftEndIntersection,rightEndIntersection,false);
+    EXPECT_EQ(rightEndIntersection->eatFood(),0);
 }

@@ -28,6 +28,10 @@ public:
     void connectStreet(std::shared_ptr<Street> connectedstreets_in);
     int eatFood();
 private:
+    bool connectWhenStreetGoesAcrossGuiEdge(std::shared_ptr<Street> connectedstreets_in);
+    void connectHorizontalStreet(std::shared_ptr<Street> connectedstreets_in, double x);
+    void connectVerticalStreet(std::shared_ptr<Street> connectedstreets_in, double y);
+    int checkAndEatFood(std::shared_ptr<Street> street);
     SDL_Point location;
     std::shared_ptr<Street> leftStreet = nullptr;
     std::shared_ptr<Street> rightStreet = nullptr;
