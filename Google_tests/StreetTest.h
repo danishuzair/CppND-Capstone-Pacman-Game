@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 #include <../src/Intersection.h>
 #include "../src/Street.h"
+#include "../src/Pacman.h"
 
 class StreetTest : public testing::Test  {
 protected:

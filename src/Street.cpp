@@ -74,10 +74,10 @@ void Street::setFood(bool hasfoodatstart,bool hasfoodatend) {
 }
 
 std::shared_ptr<Intersection> Street::checkifatintersection(float xlocation, float ylocation) {
-    if (startintersection->getLocationX() == int(xlocation) && startintersection->getLocationY() == int(ylocation)) {
+    if (startintersection->getLocationX() == round(xlocation) && startintersection->getLocationY() == round(ylocation)) {
         return startintersection;
     }
-    else if (endintersection->getLocationX() == int(xlocation) && endintersection->getLocationY() == int(ylocation)) {
+    else if (endintersection->getLocationX() == round(xlocation) && endintersection->getLocationY() == round(ylocation)) {
         return endintersection;
     }
     else {
@@ -87,8 +87,8 @@ std::shared_ptr<Intersection> Street::checkifatintersection(float xlocation, flo
 
 bool Street::eatFood(float x, float y) {
     for (int i = 0; i < foods.size(); i++) {
-        if (foods.at(i).x < int(x) + 5 && foods.at(i).x > int(x) - 5 &&
-                foods.at(i).y < int(y) + 5 && foods.at(i).y > int(y) - 5) {
+        if (foods.at(i).x < round(x) + 5 && foods.at(i).x > round(x) - 5 &&
+                foods.at(i).y < round(y) + 5 && foods.at(i).y > round(y) - 5) {
             foods.erase(foods.begin() + i);
             if(foods.empty()) {
                 hasfood = false;
@@ -187,8 +187,7 @@ bool Street::closetointersection(float x, float y, Direction currentdirection, D
     return false;
 }
 
-std::shared_ptr<Street>
-Street::getOtherStreet(float xlocation, float ylocation, float &newxlocation, float &newylocation,
+std::shared_ptr<Street>Street::getOtherStreet(float xlocation, float ylocation, float &newxlocation, float &newylocation,
                        Direction direction_in) {
     if (startintersection->getLocationX() == xlocation && startintersection->getLocationY() == ylocation) {
         newxlocation = endintersection->getLocationX();
