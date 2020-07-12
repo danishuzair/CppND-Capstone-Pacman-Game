@@ -4,7 +4,7 @@
 
 #include "Game.h"
 
-void Game::Run(Controller const &controller, Renderer &renderer, Pacman &pacman, std::vector<Ghost> &ghosts,
+void Game::Run(Controller const *controller, Renderer &renderer, Pacman &pacman, std::vector<Ghost> &ghosts,
         std::vector<std::shared_ptr<Intersection>> &intersections,
         std::vector<std::shared_ptr<Street>> &streets,
         std::size_t target_frame_duration) {
@@ -18,9 +18,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, Pacman &pacman,
     while (running) {
         frame_start = SDL_GetTicks();
 
-        // Input & Update not currently implemented
-        // render update
-        controller.HandleInput(running, pacman);
+        controller->GetNewInput(running, pacman);
         pacman.updatePosition();
         for (auto &ghost : ghosts) {
             ghost.updatePosition();

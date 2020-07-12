@@ -9,6 +9,9 @@ set(HEADER_FILES
         Pacman.h
         Renderer.h
         Street.h
+        CreateGameEnvironment.h
+        ManualController.h
+        FollowMaximumFoodAutomatedController.h
         )
 
 set(SOURCE_FILES
@@ -20,6 +23,9 @@ set(SOURCE_FILES
         Pacman.cpp
         Renderer.cpp
         Street.cpp
+        CreateGameEnvironment.cpp
+        ManualController.cpp
+        FollowMaximumFoodAutomatedController.cpp
         )
 
 add_library(Pacman_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})

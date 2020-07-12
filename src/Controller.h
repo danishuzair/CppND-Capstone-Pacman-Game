@@ -10,7 +10,7 @@
 
 class Controller{
 public:
-    void HandleInput(bool &running, Pacman &pacman) const;
+    virtual void GetNewInput(bool &running, Pacman &pacman) const = 0;
 };
 
 #endif //SDL2TEST_CONTROLLER_H

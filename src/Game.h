@@ -19,7 +19,7 @@
 class Game {
 public:
 
-    void Run(Controller const &controller, Renderer &renderer, Pacman &pacman, std::vector<Ghost> &ghosts,
+    void Run(Controller const *controller, Renderer &renderer, Pacman &pacman, std::vector<Ghost> &ghosts,
             std::vector<std::shared_ptr<Intersection>> &intersections,
              std::vector<std::shared_ptr<Street>> &streets,
             std::size_t target_frame_duration);

@@ -37,6 +37,8 @@ public:
     bool isconnecting() const {return connectingends;}
     std::shared_ptr<Street> getOtherStreet(float xlocation,float ylocation,float &newxlocation,
             float &newylocation, Direction direction_in);
+    int getRemainingFoodOnStreet() const {return foods.size();}
+    std::shared_ptr<Intersection> getOtherIntersection(std::shared_ptr<Intersection> currentIntersection) const;
 
 private:
     IntersectionLocation checkifclosetointersection(float x, float y, Direction direction);
@@ -52,6 +54,5 @@ private:
     std::shared_ptr<Intersection> startintersection;
     std::shared_ptr<Intersection> endintersection;
 };
-
 
 #endif //SDL2TEST_STREET_H

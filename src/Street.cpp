@@ -187,7 +187,7 @@ bool Street::closetointersection(float x, float y, Direction currentdirection, D
     return false;
 }
 
-std::shared_ptr<Street>Street::getOtherStreet(float xlocation, float ylocation, float &newxlocation, float &newylocation,
+std::shared_ptr<Street> Street::getOtherStreet(float xlocation, float ylocation, float &newxlocation, float &newylocation,
                        Direction direction_in) {
     if (startintersection->getLocationX() == xlocation && startintersection->getLocationY() == ylocation) {
         newxlocation = endintersection->getLocationX();
@@ -216,5 +216,15 @@ std::shared_ptr<Street>Street::getOtherStreet(float xlocation, float ylocation, 
             case(Direction::down):
                 return startintersection->getDownStreet();
         }
+    }
+}
+
+std::shared_ptr<Intersection> Street::getOtherIntersection(std::shared_ptr<Intersection> currentIntersection) const {
+    if (currentIntersection->getLocationX() == startintersection->getLocationX() && 
+        currentIntersection->getLocationY() == startintersection->getLocationY()) {
+        return endintersection;
+    }
+    else {
+        return startintersection;
     }
 }

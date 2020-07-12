@@ -24,6 +24,15 @@ This is the Capstone project for Udacity's C++ nano-degree. In this project, a v
 3. Compile: `cmake .. && make`
 4. Run it: `./PacMan`.
 
+Some available options to run the game are as follows:
+./PacMan -g #g -m #m
+"#g" can take intergers greater than and equal to 0, and signifies the number of ghosts that the game will be played with, with options ranging from a minimum of 0 and a maximum of 4. Default value is 4.
+"-m" can take the values 0 or 1. 0 means the game is in manual mode, with 1 indicating the game is in automated mode. Current automated mode has a depth-first search implementation which prefers exploring streets that have the maximum amount of available food. Default value is 0.
+
+Examples of running are as follows:
+- ./run.py -m 1 -g 2: Results in the game running in automated mode with 2 ghosts
+- ./run.py -g 0: Results in the game running in manual mode with 0 ghosts.
+
 ## Expected Behavior of the Game
 
 When the program is run, there will be a game window along with a Pacman, and 4 Ghosts. The objective is for Pacman to collect all the food to win the game without losing his three lives.

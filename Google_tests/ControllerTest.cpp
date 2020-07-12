@@ -4,6 +4,6 @@
 
 #include "ControllerTest.h"
 
-TEST_F(GhostTest, CanConstruct) {
-    Controller controller;
+TEST_F(ControllerTest, CanConstruct) {
+	
 }

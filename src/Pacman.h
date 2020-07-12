@@ -30,6 +30,7 @@ public:
     void updatestate(PacmanState pacmanstate_new);
     void updatepacmanandghoststates(std::vector<Ghost> &ghosts);
     PacmanState getCurrentState() const {return pacmanstate;}
+    std::shared_ptr<TrafficObject> getCurrentIntersectionOrStreet() const {return currentintersectionorstreet;}
 private:
     void resettoinitialstate();
     float speed{1.0f};
