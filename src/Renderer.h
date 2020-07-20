@@ -19,7 +19,7 @@ class Renderer {
 public:
     Renderer (const std::size_t screen_width, const std::size_t screen_height, bool debugmode_in = false);
     ~Renderer();
-    void Render(const Pacman &pacman, const std::vector<Ghost> &ghosts,
+    void Render(const Pacman &pacman, const std::vector<std::shared_ptr<Ghost>> ghosts,
             std::vector<std::shared_ptr<Intersection>> &intersections,
             std::vector<std::shared_ptr<Street>> &streets);
     void UpdateWindowTitle(int score, int fps, PacmanState currentstate);

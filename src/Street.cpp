@@ -228,3 +228,28 @@ std::shared_ptr<Intersection> Street::getOtherIntersection(std::shared_ptr<Inter
         return startintersection;
     }
 }
+
+bool Street::checkifonstreet(int x, int y) const{
+    if (traveldirection == TravelDirection::horizontal) {
+        if (y != average.y) {
+            return false;
+        }
+        int x1 = startintersection->getLocationX();
+        int x2 = endintersection->getLocationX();
+        if ((x <= x1 && x >= x2) || (x >= x1 && x <= x2)) {
+            return true;
+        }
+        return false;
+    }
+    else {
+        if (x != average.x) {
+            return false;
+        }
+        int y1 = startintersection->getLocationY();
+        int y2 = endintersection->getLocationY();
+        if ((y <= y1 && y >= y2) || (y >= y1 && y <= y2)) {
+            return true;
+        }
+        return false;
+    }
+}

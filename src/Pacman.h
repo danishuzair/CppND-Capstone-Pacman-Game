@@ -28,8 +28,9 @@ public:
     int getScore() const {return score;}
     void updatePosition();
     void updatestate(PacmanState pacmanstate_new);
-    void updatepacmanandghoststates(std::vector<Ghost> &ghosts);
+    void updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>>  ghosts);
     PacmanState getCurrentState() const {return pacmanstate;}
+    Direction getCurrentDirection() const {return currentdirection;}
     std::shared_ptr<TrafficObject> getCurrentIntersectionOrStreet() const {return currentintersectionorstreet;}
 private:
     void resettoinitialstate();

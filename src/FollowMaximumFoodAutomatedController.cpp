@@ -12,17 +12,17 @@ void FollowMaximumFoodAutomatedController::GetNewInput(bool &running, Pacman &pa
 
     std::shared_ptr<TrafficObject> currentIntersectionOrStreet = pacman.getCurrentIntersectionOrStreet();
     if (currentIntersectionOrStreet->getType() != ObjectType::intersection) {return; }
- 	Direction newDirection = GetUpdatedDirectionForMaximumFood(std::reinterpret_pointer_cast<Intersection>(currentIntersectionOrStreet));
+ 	Direction newDirection = GetUpdatedDirectionForMaximumFood(std::reinterpret_pointer_cast<Intersection>(currentIntersectionOrStreet), GetIndexFromDirection(pacman.getCurrentDirection()));
  	pacman.updateDirection(newDirection);
 }
 
-Direction FollowMaximumFoodAutomatedController::GetUpdatedDirectionForMaximumFood (std::shared_ptr<Intersection> currentIntersection) const {
+Direction FollowMaximumFoodAutomatedController::GetUpdatedDirectionForMaximumFood (std::shared_ptr<Intersection> currentIntersection, int indexOfCurrentDirection) const {
 	std::array<int, 4> availableFood = {0, 0, 0, 0};
 	availableFood.at(0) = SearchDepthFirst(currentIntersection->getLeftStreet(), searchDepth, currentIntersection);
 	availableFood.at(1) = SearchDepthFirst(currentIntersection->getRightStreet(), searchDepth, currentIntersection);
 	availableFood.at(2) = SearchDepthFirst(currentIntersection->getUpStreet(), searchDepth, currentIntersection);
 	availableFood.at(3) = SearchDepthFirst(currentIntersection->getDownStreet(), searchDepth, currentIntersection);
-	int indexOfNewDirection = FindIndexOfNewDirection(availableFood);
+	int indexOfNewDirection = FindIndexOfNewDirection(availableFood, indexOfCurrentDirection);
 	return GetDirectionFromIndex(indexOfNewDirection);
 }
 
@@ -32,19 +32,32 @@ int FollowMaximumFoodAutomatedController::SearchDepthFirst(std::shared_ptr<Stree
 	if (depthRemaining < 0) {return 0;}
 	depthRemaining = depthRemaining - 1;
 	std::shared_ptr<Intersection> otherIntersection = streetToSearch->getOtherIntersection(currentIntersection);
-	return streetToSearch->getRemainingFoodOnStreet() + std::max({SearchDepthFirst(otherIntersection->getLeftStreet(),depthRemaining,otherIntersection),
+	bool ghostFound = false;
+	for (auto ghost : ghosts) {
+		if (streetToSearch->checkifonstreet(ghost->getLocationX(), ghost->getLocationY())) {
+			ghostFound = true;
+			break;
+		}
+	}
+	return streetToSearch->getRemainingFoodOnStreet() - 100 * ghostFound + 
+		std::max({SearchDepthFirst(otherIntersection->getLeftStreet(),depthRemaining,otherIntersection),
 		SearchDepthFirst(otherIntersection->getRightStreet(),depthRemaining,otherIntersection),
 		SearchDepthFirst(otherIntersection->getUpStreet(),depthRemaining,otherIntersection),
 		SearchDepthFirst(otherIntersection->getDownStreet(),depthRemaining,otherIntersection)});
 }
 
-int FollowMaximumFoodAutomatedController::FindIndexOfNewDirection(std::array<int,4> availableFood) const {
+int FollowMaximumFoodAutomatedController::FindIndexOfNewDirection(std::array<int,4> availableFood, int indexOfCurrentDirection) const {
 	std::vector<int> indexOfMaximumElement = FindIndexOfMaximumElements(availableFood);
 	if (indexOfMaximumElement.size() == 1) {return indexOfMaximumElement.at(0);}
-	return BreakTiesRandomly(indexOfMaximumElement);
+	return BreakTiesRandomly(indexOfMaximumElement, indexOfCurrentDirection);
 }
 
-int FollowMaximumFoodAutomatedController::BreakTiesRandomly(std::vector<int> indexOfMaximumElement) const {
+int FollowMaximumFoodAutomatedController::BreakTiesRandomly(std::vector<int> indexOfMaximumElement, int indexOfCurrentDirection) const {
+	for (int i=0; i<indexOfMaximumElement.size(); i++) {
+		if (indexOfMaximumElement.at(i) == indexOfCurrentDirection) {
+			indexOfMaximumElement.erase(indexOfMaximumElement.begin() + i);
+		}
+	}
 	std::random_device rd;
     std::mt19937 eng(rd());
     std::uniform_int_distribution<int> distr(0, indexOfMaximumElement.size()-1);
@@ -80,5 +93,18 @@ Direction FollowMaximumFoodAutomatedController::GetDirectionFromIndex (int index
 			return Direction::up;
 		case (3):
 			return Direction::down;
+	}
+}
+
+int FollowMaximumFoodAutomatedController::GetIndexFromDirection (Direction currentDirection) const {
+	switch (currentDirection) {
+		case (Direction::left):
+			return 1;
+		case (Direction::right):
+			return 0;
+		case (Direction::up):
+			return 3;
+		case (Direction::down):
+			return 2;
 	}
 }

@@ -39,6 +39,7 @@ public:
             float &newylocation, Direction direction_in);
     int getRemainingFoodOnStreet() const {return foods.size();}
     std::shared_ptr<Intersection> getOtherIntersection(std::shared_ptr<Intersection> currentIntersection) const;
+    bool checkifonstreet(int x, int y) const;
 
 private:
     IntersectionLocation checkifclosetointersection(float x, float y, Direction direction);

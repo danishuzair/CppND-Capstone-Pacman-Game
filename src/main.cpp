@@ -39,17 +39,20 @@ int main(int argc, char *argv[]) {
 
     Renderer renderer(kScreenWidth, kScreenHeight);
 
+    Pacman pacman(streets.at(63),Direction::left);
+    
+    std::vector<std::shared_ptr<Ghost>> ghosts;
+    initializeGhosts(ghosts,numberOfGhosts,streets);
+
     FollowMaximumFoodAutomatedController automatedcontroller;
     ManualController manualcontroller;
     Controller *controller;
     controller = &automatedcontroller;
-    if (mode == 1) {controller = &automatedcontroller;}
+    if (mode == 1) {
+        controller = &automatedcontroller;
+        controller->attachGhosts(ghosts);
+    }
     else {controller = &manualcontroller;}
-
-    Pacman pacman(streets.at(63),Direction::left);
-    
-    std::vector<Ghost> ghosts;
-    initializeGhosts(ghosts,numberOfGhosts,streets);
 
     Game game;
     game.Run(controller, renderer, pacman, ghosts, intersections, streets, kMsPerFrame);

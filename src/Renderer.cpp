@@ -56,7 +56,7 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(const Pacman &pacman, const std::vector<Ghost> &ghosts,
+void Renderer::Render(const Pacman &pacman, const std::vector<std::shared_ptr<Ghost>> ghosts,
         std::vector<std::shared_ptr<Intersection>> &intersections,
         std::vector<std::shared_ptr<Street>> &streets) {
     // Clear Screen
@@ -76,10 +76,10 @@ void Renderer::Render(const Pacman &pacman, const std::vector<Ghost> &ghosts,
     SDL_RenderFillRect(sdl_renderer, &block);
 
     // Displaying the ghosts
-    for (const Ghost& ghost : ghosts) {
-        block.x = ghost.getLocationX();
-        block.y = ghost.getLocationY();
-        Color color = ghost.getColor();
+    for (const auto ghost : ghosts) {
+        block.x = ghost->getLocationX();
+        block.y = ghost->getLocationY();
+        Color color = ghost->getColor();
         switch(color) {
             case(Color::red):
                 SDL_SetRenderDrawColor(sdl_renderer,0xFF, 0x00, 0x00, 0xFF);

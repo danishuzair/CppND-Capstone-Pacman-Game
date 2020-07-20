@@ -4,7 +4,7 @@
 
 TEST_F(CreateGameEnvironmentTest, InitializeGhostsTest) {
 	int numberOfGhost = 0;
-	std::vector<Ghost> ghosts;
+	std::vector<std::shared_ptr<Ghost>> ghosts;
 	std::vector<std::shared_ptr<Intersection>> intersections;
     std::vector<std::shared_ptr<Street>> streets;
     CreateTraffic(intersections, streets);

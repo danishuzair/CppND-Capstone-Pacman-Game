@@ -30,8 +30,8 @@ Some available options to run the game are as follows:
 "-m" can take the values 0 or 1. 0 means the game is in manual mode, with 1 indicating the game is in automated mode. Current automated mode has a depth-first search implementation which prefers exploring streets that have the maximum amount of available food. Default value is 0.
 
 Examples of running are as follows:
-- ./run.py -m 1 -g 2: Results in the game running in automated mode with 2 ghosts
-- ./run.py -g 0: Results in the game running in manual mode with 0 ghosts.
+- ./PacMan -m 1 -g 2: Results in the game running in automated mode with 2 ghosts
+- ./PacMan -g 0: Results in the game running in manual mode with 0 ghosts.
 
 ## Expected Behavior of the Game
 

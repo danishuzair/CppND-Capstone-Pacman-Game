@@ -370,10 +370,10 @@ void Pacman::updatestate(PacmanState pacmanstate_new) {
     pacmanstate = pacmanstate_new;
 }
 
-void Pacman::updatepacmanandghoststates(std::vector<Ghost> &ghosts) {
+void Pacman::updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>> ghosts) {
     bool collisiondetected = false;
-    for (auto &ghost : ghosts) {
-        collisiondetected = ghost.checkForCollision(xlocation,ylocation);
+    for (auto ghost : ghosts) {
+        collisiondetected = ghost->checkForCollision(xlocation,ylocation);
         if (collisiondetected) {
             break;
         }
@@ -381,21 +381,21 @@ void Pacman::updatepacmanandghoststates(std::vector<Ghost> &ghosts) {
     if (collisiondetected) {
         resettoinitialstate();
         if(pacmanstate!=PacmanState::dead) {
-            for (auto &ghost : ghosts) {
-                ghost.resettoinitialstate();
+            for (auto ghost : ghosts) {
+                ghost->resettoinitialstate();
             }
         }
         else {
-            for (auto &ghost : ghosts) {
-                ghost.settodeadstate();
+            for (auto ghost : ghosts) {
+                ghost->settodeadstate();
             }
         }
     }
 
     if(score >= 1870) {
         updatestate(PacmanState::victory);
-        for (auto &ghost : ghosts) {
-            ghost.settodeadstate();
+        for (auto ghost : ghosts) {
+            ghost->settodeadstate();
         }
     }
 }
