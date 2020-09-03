@@ -12,7 +12,7 @@
 #include <iostream>
 
 class Street;
-
+enum class Direction;
 class Intersection : public TrafficObject {
 public:
     Intersection(){
@@ -27,6 +27,7 @@ public:
     std::shared_ptr<Street> getDownStreet() const {return downStreet;}
     void connectStreet(std::shared_ptr<Street> connectedstreets_in);
     int eatFood();
+    Direction getDirectionToIntersection(int x, int y);
 private:
     bool connectWhenStreetGoesAcrossGuiEdge(std::shared_ptr<Street> connectedstreets_in);
     void connectHorizontalStreet(std::shared_ptr<Street> connectedstreets_in, double x);

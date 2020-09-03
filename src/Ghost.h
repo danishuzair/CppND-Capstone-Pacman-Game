@@ -15,6 +15,7 @@
 enum class Color {red, pink, cyan, orange};
 enum class GhostState {gameon, gemeend};
 
+enum class Direction;
 Direction getRandomDirection();
 
 class Ghost {

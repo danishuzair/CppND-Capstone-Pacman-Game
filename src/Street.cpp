@@ -4,7 +4,7 @@
 
 #include "Street.h"
 #include "Intersection.h"
-#include "Pacman.h"
+#include <cmath>
 
 void Street::initializeStreet(bool hasfood_in, bool hasfoodatstart, bool hasfoodatend, bool accessible_in,
                               std::shared_ptr<Intersection> startintersection_in,
@@ -15,6 +15,7 @@ void Street::initializeStreet(bool hasfood_in, bool hasfoodatstart, bool hasfood
     endintersection = endIntersection_in;
     setAverage();
     setTravelDirection();
+    setLength();
     accessible = accessible_in;
     startintersection->connectStreet(get_shared_this());
     endintersection->connectStreet(get_shared_this());
@@ -22,9 +23,87 @@ void Street::initializeStreet(bool hasfood_in, bool hasfoodatstart, bool hasfood
     setFood(hasfoodatstart,hasfoodatend);
 }
 
+bool Street::isGhostFound(Direction currentdirection,int x,int y,int xGhost, int yGhost) const {
+    int xIntersection, yIntersection;
+    FindIntersectionCoordinatesAtEndOfCurrentDirection(currentdirection, xIntersection, yIntersection);
+    return findGhost(x,y,xIntersection,yIntersection,currentdirection,xGhost,yGhost);
+}
+
+bool Street::findGhost(int x, int y, int xIntersection, int yIntersection, Direction currentdirection,int xGhost, int yGhost) const{
+    if (currentdirection == Direction::left || currentdirection == Direction::right) {
+        if (yGhost != y) {return false;}
+        if ((xGhost <= x && xGhost >=xIntersection) || (xGhost >= x && xGhost <=xIntersection)) {
+            return true;
+        }
+    }
+    else {
+        if (xGhost != x) {return false;}
+        if ((yGhost <= y && yGhost >=yIntersection) || (yGhost >= y && yGhost <=yIntersection)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Street::FindIntersectionCoordinatesAtEndOfCurrentDirection(Direction currentdirection, int &x, int &y) const{
+    int xStartIntersection = startintersection->getLocationX();
+    int yStartIntersection = startintersection->getLocationY();
+    int xEndIntersection = endintersection->getLocationX();
+    int yEndIntersection = endintersection->getLocationY();
+    if (currentdirection == Direction::down) {
+        if (yStartIntersection > average.y){
+            x = xStartIntersection,
+            y = yStartIntersection;
+        }
+        else {
+            x = xEndIntersection;
+            y = yEndIntersection;
+        }
+    }
+    else if (currentdirection == Direction::up) {
+        if (yStartIntersection < average.y){
+            x = xStartIntersection,
+            y = yStartIntersection;
+        }
+        else {
+            x = xEndIntersection;
+            y = yEndIntersection;
+        }
+    }
+    else if (currentdirection == Direction::left) {
+        if (xStartIntersection < average.x){
+            x = xStartIntersection,
+            y = yStartIntersection;
+        }
+        else {
+            x = xEndIntersection;
+            y = yEndIntersection;
+        }
+    }
+    else { // currentdirection::right
+        if (xStartIntersection > average.x){
+            x = xStartIntersection,
+            y = yStartIntersection;
+        }
+        else {
+            x = xEndIntersection;
+            y = yEndIntersection;
+        }
+    }
+}
+
 void Street::setAverage() {
     average.x = (startintersection->getLocationX() + endintersection->getLocationX())/2;
     average.y = (startintersection->getLocationY() + endintersection->getLocationY())/2;
+}
+
+void Street::setLength() {
+    if (traveldirection == TravelDirection::horizontal) {
+        length = std::abs(endintersection->getLocationX() - startintersection->getLocationX());
+    }
+    else {
+        length = std::abs(endintersection->getLocationY() - startintersection->getLocationY());
+    }
 }
 
 void Street::setTravelDirection() {

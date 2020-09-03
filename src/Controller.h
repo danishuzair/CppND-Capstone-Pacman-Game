@@ -10,7 +10,7 @@
 
 class Controller{
 public:
-    virtual void GetNewInput(bool &running, Pacman &pacman) const = 0;
+    virtual void GetNewInput(bool &running, Pacman &pacman) = 0;
     void attachGhosts(std::vector<std::shared_ptr<Ghost>> ghosts_in);
 protected:
  	std::vector<std::shared_ptr<Ghost>> ghosts;

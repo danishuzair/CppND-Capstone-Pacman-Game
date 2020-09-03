@@ -1,7 +1,7 @@
 
 #include "ManualController.h"
 
-void ManualController::GetNewInput(bool &running, Pacman &pacman) const {
+void ManualController::GetNewInput(bool &running, Pacman &pacman) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {

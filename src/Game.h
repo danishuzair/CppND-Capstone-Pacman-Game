@@ -15,11 +15,12 @@
 #include "Intersection.h"
 #include <memory>
 #include "Street.h"
+#include <chrono>
 
 class Game {
 public:
 
-    void Run(Controller const *controller, Renderer &renderer, Pacman &pacman, std::vector<std::shared_ptr<Ghost>> ghosts,
+    void Run(Controller *controller, Renderer &renderer, Pacman &pacman, std::vector<std::shared_ptr<Ghost>> ghosts,
             std::vector<std::shared_ptr<Intersection>> &intersections,
              std::vector<std::shared_ptr<Street>> &streets,
             std::size_t target_frame_duration);

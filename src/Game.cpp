@@ -4,7 +4,7 @@
 
 #include "Game.h"
 
-void Game::Run(Controller const *controller, Renderer &renderer, Pacman &pacman, std::vector<std::shared_ptr<Ghost>> ghosts,
+void Game::Run(Controller *controller, Renderer &renderer, Pacman &pacman, std::vector<std::shared_ptr<Ghost>> ghosts,
         std::vector<std::shared_ptr<Intersection>> &intersections,
         std::vector<std::shared_ptr<Street>> &streets,
         std::size_t target_frame_duration) {
@@ -14,7 +14,9 @@ void Game::Run(Controller const *controller, Renderer &renderer, Pacman &pacman,
     Uint32 frame_duration;
     int frame_count = 0;
     bool running = true;
-
+    bool timer_at_gameend_printed = false;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    
     while (running) {
         frame_start = SDL_GetTicks();
 
@@ -43,6 +45,12 @@ void Game::Run(Controller const *controller, Renderer &renderer, Pacman &pacman,
         // If frame_duration is smaller than target ms_per_frame, delay the loop to achieve desired frame rate
         if (frame_duration < target_frame_duration) {
             SDL_Delay(target_frame_duration - frame_duration);
+        }
+
+        if (!timer_at_gameend_printed && pacman.getCurrentState() == PacmanState::victory) {
+            auto t2 = std::chrono::high_resolution_clock::now();
+            std::cout << "You finished the game in "<<std::chrono::duration_cast<std::chrono::seconds>( t2 - t1 ).count()<<" seconds.\n";
+            timer_at_gameend_printed = true;
         }
     }
 }

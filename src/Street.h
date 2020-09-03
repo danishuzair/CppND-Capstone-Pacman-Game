@@ -9,6 +9,8 @@
 #include "SDL.h"
 #include <memory>
 #include "TrafficObject.h"
+#include "Ghost.h"
+#include "Pacman.h"
 
 class Intersection;
 enum class Direction;
@@ -39,10 +41,17 @@ public:
             float &newylocation, Direction direction_in);
     int getRemainingFoodOnStreet() const {return foods.size();}
     std::shared_ptr<Intersection> getOtherIntersection(std::shared_ptr<Intersection> currentIntersection) const;
+    std::shared_ptr<Intersection> getStartIntersection() const {return startintersection;}
+    std::shared_ptr<Intersection> getEndIntersection() const {return endintersection;}
     bool checkifonstreet(int x, int y) const;
+    int getStreetLength() const {return length;}
+    bool isGhostFound(Direction currentdirection,int x,int y,int xGhost, int yGhost) const;
 
 private:
+    bool findGhost(int x, int y, int xIntersection, int yIntersection, Direction currentdirection,int xGhost, int yGhost) const;
+    void FindIntersectionCoordinatesAtEndOfCurrentDirection(Direction currentdirection, int &x, int &y) const;
     IntersectionLocation checkifclosetointersection(float x, float y, Direction direction);
+    void setLength();
     void setTravelDirection();
     void setFood(bool hasfoodatstart,bool hasfoodatend);
     void setAverage();
@@ -51,6 +60,7 @@ private:
     bool hasfood;
     bool accessible; // Is Pacman allowed to travel on this street
     bool connectingends;
+    int length;
     std::vector<SDL_Point> foods;
     std::shared_ptr<Intersection> startintersection;
     std::shared_ptr<Intersection> endintersection;

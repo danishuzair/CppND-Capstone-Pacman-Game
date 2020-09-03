@@ -8,7 +8,7 @@
 
 class ManualController : public Controller {
  public:
- 	void GetNewInput(bool &running, Pacman &pacman) const;
+ 	void GetNewInput(bool &running, Pacman &pacman);
  private:
 };
 

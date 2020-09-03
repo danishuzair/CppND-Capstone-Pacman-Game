@@ -4,6 +4,7 @@
 
 #include "Intersection.h"
 #include "Street.h"
+#include "Pacman.h"
 
 void Intersection::setLocation(int x, int y) {
     location.x = x;
@@ -64,4 +65,23 @@ int Intersection::eatFood() {
     count += checkAndEatFood(leftStreet);
     count += checkAndEatFood(rightStreet);
     return count;
+}
+
+Direction Intersection::getDirectionToIntersection(int x, int y){
+    if (x == location.x) {
+        if (y > location.y) {
+            return Direction::up;
+        }
+        else {
+            return Direction::down;
+        }
+    }
+    else { // y == location.y
+        if (x > location.x) {
+            return Direction::left;
+        }
+        else {
+            return Direction::right;
+        }
+    }
 }
