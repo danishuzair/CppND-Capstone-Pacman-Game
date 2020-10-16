@@ -46,7 +46,6 @@ Direction FollowMaximumFoodAutomatedController::GetUpdatedDirectionForMaximumFoo
 	availableFood.at(3) = SearchDepthFirst(currentIntersection->getDownStreet(), searchDepth, currentIntersection, 0);
 	if (std::max({availableFood.at(0),availableFood.at(1),availableFood.at(2),availableFood.at(3)}) <= 0.01) {
 		searchDepth = searchDepth + 3;
-		std::cout<<searchDepth<<std::endl;
 	}
 	else if (searchDepth > 3) {
 		searchDepth = 3;
