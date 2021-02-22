@@ -370,7 +370,7 @@ void Pacman::updatestate(PacmanState pacmanstate_new) {
     pacmanstate = pacmanstate_new;
 }
 
-void Pacman::updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>> ghosts) {
+void Pacman::updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>> ghosts, ScreenShot &screenshot) {
     bool collisiondetected = false;
     for (auto ghost : ghosts) {
         collisiondetected = ghost->checkForCollision(xlocation,ylocation);
@@ -379,7 +379,7 @@ void Pacman::updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>> ghos
         }
     }
     if (collisiondetected) {
-        resettoinitialstate();
+        resettoinitialstate(screenshot);
         if(pacmanstate!=PacmanState::dead) {
             for (auto ghost : ghosts) {
                 ghost->resettoinitialstate();
@@ -400,7 +400,9 @@ void Pacman::updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>> ghos
     }
 }
 
-void Pacman::resettoinitialstate() {
+void Pacman::resettoinitialstate(ScreenShot &screenshot) {
+    screenshot.writeReward(-20);
+    screenshot.updateRun();
     switch(pacmanstate) {
         case(PacmanState::newborn):
             pacmanstate = PacmanState::secondlife;
@@ -420,5 +422,18 @@ void Pacman::resettoinitialstate() {
         ylocation = 473;
         currentdirection = startdirection;
         currentintersectionorstreet = startintersectionorstreet;
+    }
+}
+
+std::string Pacman::getCurrentDirectionString() const {
+    switch (currentdirection) {
+        case(Direction::left):
+            return "left";
+        case (Direction::right):
+            return "right";
+        case (Direction::up):
+            return "up";
+        case (Direction::down):
+            return "down";
     }
 }

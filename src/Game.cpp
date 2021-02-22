@@ -7,7 +7,9 @@
 void Game::Run(Controller *controller, Renderer &renderer, Pacman &pacman, std::vector<std::shared_ptr<Ghost>> ghosts,
         std::vector<std::shared_ptr<Intersection>> &intersections,
         std::vector<std::shared_ptr<Street>> &streets,
-        std::size_t target_frame_duration) {
+        std::size_t target_frame_duration, ScreenShot &screenshot) {
+    screenshot.updateRun();
+    Uint32 capture_timestamp = SDL_GetTicks();
     Uint32 title_timestamp = SDL_GetTicks();
     Uint32 frame_start;
     Uint32 frame_end;
@@ -25,7 +27,7 @@ void Game::Run(Controller *controller, Renderer &renderer, Pacman &pacman, std::
         for (auto &ghost : ghosts) {
             ghost->updatePosition();
         }
-        pacman.updatepacmanandghoststates(ghosts);
+        pacman.updatepacmanandghoststates(ghosts, screenshot);
         renderer.Render(pacman, ghosts, intersections, streets);
 
         frame_end = SDL_GetTicks();
@@ -42,15 +44,22 @@ void Game::Run(Controller *controller, Renderer &renderer, Pacman &pacman, std::
             title_timestamp = frame_end;
         }
 
+        if (frame_end - capture_timestamp >= 5000) {
+            screenshot.captureImage(pacman.getCurrentDirectionString());
+            capture_timestamp = frame_end;
+        }
+
         // If frame_duration is smaller than target ms_per_frame, delay the loop to achieve desired frame rate
         if (frame_duration < target_frame_duration) {
             SDL_Delay(target_frame_duration - frame_duration);
         }
 
         if (!timer_at_gameend_printed && pacman.getCurrentState() == PacmanState::victory) {
+            screenshot.writeReward(1);
             auto t2 = std::chrono::high_resolution_clock::now();
             std::cout << "You finished the game in "<<std::chrono::duration_cast<std::chrono::seconds>( t2 - t1 ).count()<<" seconds.\n";
             timer_at_gameend_printed = true;
+            return;
         }
     }
 }

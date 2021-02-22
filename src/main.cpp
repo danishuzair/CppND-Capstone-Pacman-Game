@@ -17,6 +17,8 @@
 
 int main(int argc, char *argv[]) {
 
+    ScreenShot screen(704,242,512,640);
+
     int numberOfGhosts = 4;
     int mode = 0;
     for (int i=1; i<argc; i+=2) {
@@ -55,6 +57,6 @@ int main(int argc, char *argv[]) {
     else {controller = &manualcontroller;}
 
     Game game;
-    game.Run(controller, renderer, pacman, ghosts, intersections, streets, kMsPerFrame);
+    game.Run(controller, renderer, pacman, ghosts, intersections, streets, kMsPerFrame, screen);
     return 0;
 }

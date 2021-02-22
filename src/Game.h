@@ -23,7 +23,7 @@ public:
     void Run(Controller *controller, Renderer &renderer, Pacman &pacman, std::vector<std::shared_ptr<Ghost>> ghosts,
             std::vector<std::shared_ptr<Intersection>> &intersections,
              std::vector<std::shared_ptr<Street>> &streets,
-            std::size_t target_frame_duration);
+            std::size_t target_frame_duration, ScreenShot &screenshot);
 
 private:
     int score{0};

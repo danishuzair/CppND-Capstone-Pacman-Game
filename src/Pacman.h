@@ -5,6 +5,7 @@
 #ifndef SDL2TEST_PACMAN_H
 #define SDL2TEST_PACMAN_H
 
+#include "ScreenShot.h"
 #include "SDL.h"
 #include "memory"
 #include "TrafficObject.h"
@@ -28,12 +29,13 @@ public:
     int getScore() const {return score;}
     void updatePosition();
     void updatestate(PacmanState pacmanstate_new);
-    void updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>>  ghosts);
+    void updatepacmanandghoststates(std::vector<std::shared_ptr<Ghost>>  ghosts, ScreenShot &screenshot);
     PacmanState getCurrentState() const {return pacmanstate;}
     Direction getCurrentDirection() const {return currentdirection;}
+    std::string getCurrentDirectionString() const;
     std::shared_ptr<TrafficObject> getCurrentIntersectionOrStreet() const {return currentintersectionorstreet;}
 private:
-    void resettoinitialstate();
+    void resettoinitialstate(ScreenShot &screenshot);
     float speed{1.0f};
     float xlocation;
     float ylocation;

@@ -12,6 +12,7 @@ set(HEADER_FILES
         CreateGameEnvironment.h
         ManualController.h
         FollowMaximumFoodAutomatedController.h
+        ScreenShot.h
         )
 
 set(SOURCE_FILES
@@ -26,6 +27,7 @@ set(SOURCE_FILES
         CreateGameEnvironment.cpp
         ManualController.cpp
         FollowMaximumFoodAutomatedController.cpp
+        ScreenShot.cpp
         )
 
 add_library(Pacman_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
@@ -34,4 +36,4 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} src)
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 
-target_link_libraries(Pacman_lib ${SDL2_LIBRARIES})
+target_link_libraries(Pacman_lib ${SDL2_LIBRARIES} stdc++fs)
